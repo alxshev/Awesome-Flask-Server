@@ -1,0 +1,27 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+</head>
+
+<script type=text/javascript>
+  var timeout = 200; // ms
+
+  // Makes AJAX request to Flask server
+  function executeQuery() { 
+      $.get($SCRIPT_ROOT + '/_model_output', function(data) {
+        $("#model_output").text(data.result);
+      });
+      $.get($SCRIPT_ROOT + '/_model_data', function(data) {
+        $("#model_data").text(data.result);
+      });
+  }
+  $(function() {
+    setInterval(executeQuery, timeout);
+  });
+</script>
+
+<h1>Flask Server for Reading ML Data</h1>
+Model output: <span id="model_output"></span><br>
+Model data: <span id="model_data"></span>
