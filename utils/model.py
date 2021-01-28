@@ -159,7 +159,7 @@ class Conv_Model(nn.Module):
     def __init__(self):
         super(Conv_Model, self).__init__()
 
-        self.conv1 = nn.Conv2d(args.patch_classes, 32, kernel_size=5, stride=1, padding=2, bias=False)
+        self.conv1 = nn.Conv2d(8, 32, kernel_size=5, stride=1, padding=2, bias=False)
         self.bn1 = nn.BatchNorm2d(32)
 
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=2, padding=1, bias=False)
@@ -173,7 +173,7 @@ class Conv_Model(nn.Module):
 
         self.pool = nn.AdaptiveAvgPool2d(output_size=(1, 1))
 
-        self.fc = nn.Linear(256, args.classes)
+        self.fc = nn.Linear(256, 2)
         self.dropout = nn.Dropout(0.3)
         self.relu = nn.ReLU()
 
