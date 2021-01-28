@@ -1,4 +1,4 @@
-from ML.utils.model import Conv_Model
+from ML.model import Conv_Model
 import torch
 import time
 import numpy as np
