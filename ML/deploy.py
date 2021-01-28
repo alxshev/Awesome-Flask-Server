@@ -1,8 +1,8 @@
 # goes thru entire pipeline
 
-from utils.model import Conv_Model
+from ML.utils.model import Conv_Model
 import torch
-from myargs import args
+# from myargs import args
 import time
 import numpy as np
 from scipy import signal
@@ -22,7 +22,7 @@ class DeployModel:
         # pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
         # model_dict.update(pretrained_dict)
         # model.load_state_dict(model_dict)
-        self.model = model.cuda().eval()
+        self.model = model.eval()
 
     def process_data(self, data, samp_freq=250, nperseg=32):
         # assume we receive ch*seq_len array, choose nperseg to make a square array
@@ -61,9 +61,8 @@ class DeployModel:
         with torch.no_grad():
 
             # send data and get model output
-            proc_data = self.process_data(x).cuda()
+            proc_data = self.process_data(x)
             out = self.model(proc_data)
-            print(out)
             out = torch.argmax(out, dim=1).item()
 
             data = [d.tolist() for d in x]
