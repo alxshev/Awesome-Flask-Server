@@ -1,8 +1,5 @@
-# goes thru entire pipeline
-
 from ML.utils.model import Conv_Model
 import torch
-# from myargs import args
 import time
 import numpy as np
 from scipy import signal
@@ -17,11 +14,6 @@ class DeployModel:
 
         # load model
         model = Conv_Model()
-        # pretrained_dict = torch.load(model_path)['state_dict']
-        # model_dict = model.state_dict()
-        # pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
-        # model_dict.update(pretrained_dict)
-        # model.load_state_dict(model_dict)
         self.model = model.eval()
 
     def process_data(self, data, samp_freq=250, nperseg=32):
@@ -44,15 +36,22 @@ class DeployModel:
         return spectro
 
     def data_gen_test(self):
-        # while True:
-        # temp data out
+        """
+        Generator which generates dummy data of format (channels, sequence_length)
+        simulating the headset
+        Returns: data - np.array simulating headset data
+        """
         data = np.random.normal(loc=0, scale=1, size=(self.ch, self.seq_len))
-        # df_ecg = cytonBoard.poll(seq_length)  # Polling for samples
-        # data = df_ecg.iloc[:, 0].values  ## extracting values
         return data
-        # time.sleep(1)  # Updating the window in every one second
 
     def get_data_and_model(self):
+        """
+        Function which returns data fed into model and the model output
+        in a tuple of the form (data, model_output)
+        Returns: 
+          - data: np.array of floats, size (channels, sequence_length)
+          - model output: int, either a 0 or a 1 depending on what the ML model predicts
+        """
 
         # get generator
         x = self.data_gen_test()
@@ -68,8 +67,3 @@ class DeployModel:
             data = [d.tolist() for d in x]
 
         return data, out
-
-
-if __name__ == '__main__':
-    dm = DeployModel('./data/model/spectro_conv_134.pt')
-    # dm.deploy()
