@@ -1,7 +1,7 @@
 Awesome-Flask-Server
 Flask Server which gets Python code from the server and outputs it on the client side using JQuery AJAX requests
 
-!()[picture-demo.jpg]
+![](picture-demo.jpg)
 
 How to run:
   1. Install Python dependencies from `requirements.txt` (`pip install -r requirements.txt`)
