@@ -2,7 +2,7 @@
 
 from utils.model import Conv_Model
 import torch
-from myargs import args
+# from myargs import args
 import time
 import numpy as np
 from scipy import signal
@@ -63,7 +63,6 @@ class DeployModel:
             # send data and get model output
             proc_data = self.process_data(x)
             out = self.model(proc_data)
-            print(out)
             out = torch.argmax(out, dim=1).item()
 
             data = [d.tolist() for d in x]

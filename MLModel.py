@@ -1,6 +1,6 @@
 from random import random
-from utils.model import Conv_Model
-from myargs import args
+# from utils.model import Conv_Model
+# from myargs import args
 
 def visualizationData():
 	"""

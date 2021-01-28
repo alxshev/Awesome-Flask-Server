@@ -57,4 +57,4 @@ parser.add_argument('--patch_classes', default=8, type=int,
 ######################## Folders ########################
 
 
-args = parser.parse_args()
+args = parser.parse_known_args()
